@@ -16,9 +16,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.7.0",
-    "prettier": "^3.1.0",
-    "vue": "^3.4.0",
-    "xml2js": "^0.6.2"
+    "vue": "^3.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",

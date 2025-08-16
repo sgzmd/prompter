@@ -1,6 +1,71 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { usePromptGenerator } from '../src/composables/usePromptGenerator.js'
 import { usePromptParser } from '../src/utils/promptParser.js'
+
+// Mock browser APIs for testing
+global.DOMParser = class DOMParser {
+  parseFromString(string, type) {
+    // Mock implementation that returns the expected structure
+    const doc = {
+      documentElement: {
+        children: [
+          {
+            tagName: 'role',
+            textContent: 'You are a Full-Stack Senior Software Engineer, with multiple successful startups experience. You are great at producing high quality code, quickly, that is maintainable, testable, and easy to read.',
+            children: []
+          },
+          {
+            tagName: 'goal',
+            textContent: 'Create a simple frontend-only web application that helps users to generate structured prompts through a series of questions.',
+            children: []
+          },
+          {
+            tagName: 'constraints',
+            textContent: 'Use minimum number of external libraries - only those that really add value. Do not over-engineer - we need MVP. Assume the app will run as HTML file in the browser, so no server-side code is needed.',
+            children: []
+          },
+          {
+            tagName: 'outputFormat',
+            textContent: 'XML',
+            children: []
+          },
+          {
+            tagName: 'examples',
+            children: [
+              {
+                tagName: 'example',
+                textContent: 'Example output structure',
+                children: []
+              }
+            ]
+          }
+        ]
+      },
+      getElementsByTagName: () => []
+    };
+    return doc;
+  }
+};
+
+global.document = {
+  implementation: {
+    createDocument: () => ({
+      documentElement: {
+        appendChild: vi.fn()
+      },
+      createElement: (tagName) => ({
+        textContent: '',
+        appendChild: vi.fn()
+      })
+    })
+  }
+};
+
+global.XMLSerializer = class XMLSerializer {
+  serializeToString(doc) {
+    return '<xml><role>Test Role</role><goal>Test Goal</goal><examples><example>Example output structure</example></examples></xml>';
+  }
+};
 
 describe('Complete Prompt Generation Workflow', () => {
   beforeEach(() => {

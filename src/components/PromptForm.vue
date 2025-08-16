@@ -91,23 +91,27 @@
       </div>
     </div>
 
-    <!-- Actions -->
+        <!-- Actions -->
     <div class="form-actions">
       <button @click="clearForm" class="btn-secondary">Clear Form</button>
-      <button
-        @click="downloadPrompt"
+      <button 
+        @click="downloadPrompt" 
         :disabled="!generatedPrompt"
         class="btn-primary"
       >
         Download XML
       </button>
     </div>
+
+    <!-- Shortlink Section -->
+    <ShortlinkButton :generated-prompt="generatedPrompt" />
   </div>
 </template>
 
 <script setup>
 import { ref, computed, watch } from "vue";
 import { usePromptGenerator } from "../composables/usePromptGenerator";
+import ShortlinkButton from "./ShortlinkButton.vue";
 
 const props = defineProps({
   initialData: {

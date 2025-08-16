@@ -26,11 +26,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import ImportPrompt from "./components/ImportPrompt.vue";
 import PromptForm from "./components/PromptForm.vue";
 import PromptPreview from "./components/PromptPreview.vue";
 import { usePromptGenerator } from "./composables/usePromptGenerator";
+import { ShortlinkGenerator } from "./utils/shortlinkGenerator.js";
 
 const { generatedPrompt, isGenerating, formatError } = usePromptGenerator();
 
@@ -44,6 +45,27 @@ const handleFormUpdate = () => {
   // This is handled by the composable's reactive system
   // Form data is automatically processed by the composable
 };
+
+// Handle shortlink on app load
+onMounted(async () => {
+  if (ShortlinkGenerator.hasShortlink()) {
+    try {
+      const xmlContent = await ShortlinkGenerator.parseShortlink(window.location.href);
+      const { parsePrompt } = await import('./utils/promptParser.js');
+      const result = await parsePrompt(xmlContent);
+      
+      if (result.success) {
+        importedData.value = result.components;
+        // Show success message
+        console.log('✅ Shortlink loaded successfully!');
+      } else {
+        console.error('❌ Failed to parse shortlink:', result.error);
+      }
+    } catch (error) {
+      console.error('❌ Failed to load shortlink:', error.message);
+    }
+  }
+});
 </script>
 
 <style scoped>

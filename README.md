@@ -10,6 +10,7 @@ A frontend-only web application that helps users generate structured prompts thr
 - **Multiple output formats** - JSON, XML, HTML, Markdown, or Custom
 - **Examples management** - Add multiple examples to your prompt
 - **Download functionality** - Export your generated prompt as XML
+- **🔗 Shortlink sharing** - Create shareable links for your prompts
 - **Modern UI** - Clean, responsive design with dark theme
 
 ## Quick Start
@@ -89,6 +90,15 @@ The XML prompt is generated automatically as you fill out the form.
 ### Downloading Your Prompt
 
 Click the "Download XML" button to save your generated prompt as an XML file.
+
+### Sharing Your Prompt
+
+1. Fill out your prompt form
+2. Click "🔗 Create Shortlink" to generate a shareable link
+3. Copy the link and share it with others
+4. When someone opens the link, the prompt will be automatically loaded
+
+**⚠️ Security Notice**: Shortlinks contain your prompt data encoded in the URL. While convenient for sharing, be aware that the data is visible in the URL and may be logged by browsers, servers, and proxies. Don't share sensitive information via shortlinks.
 
 ## Project Structure
 

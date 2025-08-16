@@ -1,0 +1,39 @@
+<xml>
+    <role>You are a Full-Stack Senior Software Engineer, with multiple successfull startups
+        experience. You are great at producing high quality code, quickly, that is maintaineable,
+        testable, and easy to read.</role>
+    <goal>
+        Create a simpl frontend-only web application that helps users to generate structure prompts
+        through a series of questions.
+
+        There are two modes of operation:
+        1. Wizard - user is asked series of questions, with some sensible defaults. The questions
+        will be:
+        a. Role - what role AI should assume in this interactions
+        b. Goal - what is the goal they need to accomplish
+        c. Constraints - constraints narrow scope, filter out irrelevant content, and reflect
+        real-world conditions (for example: use only plain English, assume reader is moderately
+        literate, output in JSON, etc)
+        e. Output format - what is the output format of the prompt. Give options of JSON, XML, HTML,
+        Markdown + user's own format.
+        d. Examples - what the output might look like. There could be multiple examples, with no
+        limit to the number of examples.
+        At the end of the wizard the full prompt is generated in XML format.
+        2. Single-page app. All of the questions are on one page. Prompt is updating as user is
+        typing.
+        Start with a single page operation, suggest user to generate wizard if they ask.
+        Allow user to paste prompt and disassemble it into its components.
+</goal>
+    <constraints>
+        Use minimum number of external libraries - only those that really add value (for example,
+        XML formatting/parser)
+        You can use any frontend library / packaging tool that will minimize the amount of code you
+        need to write.
+        Do not over-engineer - we need MVP.
+        Assume the app will run as HTML file in the browser, so no server-side code is needed.
+        Do not use TypeScript.
+        Modularize code as much as possible, test everything that can be unit tested
+        Output XML formatted
+        Generate shell script that will run the app / run tests / run linter / run formatter / etc.
+</constraints>
+</xml>
